@@ -1,0 +1,109 @@
+﻿@page
+@model MoneyPlus.Pages.Reports.Report5Model
+
+
+
+@{
+    ViewData["Title"] = "Financial Ballast";
+}
+
+<h1 class="display-5">@ViewData["Title"]</h1>
+<br />
+<div class="display-3 navbar-brand ">
+    <div style="font-weight: bold">
+        <label class="col-sm-2 col-form-label ">
+            Total Balance:
+            <span class="text-success" style="font-weight: bold"> $ @ViewData["ResultSumBalance"]</span>
+        </label>
+    </div>
+</div>
+<br />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Account[0].Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account[0].Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account[0].Balance)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Account)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Balance)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+<div class="display-3 navbar-brand">
+    <div style="font-weight: bold">
+        <label class="col-sm-2 col-form-label ">
+            Average Annual Revenue:
+            <span class="text-success" style="font-weight: bold"> $ @ViewData["AverageAnnualRevenue"]</span>
+        </label>
+        <br />
+        <label class="col-sm-2 col-form-label ">
+            Average Annual Expense:
+            <span class="text-danger" style="font-weight: bold"> $ @ViewData["AverageAnnualExpense"]</span>
+        </label>
+    </div>
+</div>
+<br />
+<br />
+<form method="get">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label text-danger" style="font-weight: bold">Inflation Rate %</label>
+                <input type="text" name="inflation" value="@ViewData["inflation"]" />
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="control-label text-success" style="font-weight: bold">Rate Return Investment %</label>
+                <input type="text" name="returns" value="@ViewData["returns"]" />
+            </div>
+        </div>
+    </div>
+   <br/>
+    <div class="row">
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Filter</button> | <a class="btn btn-secondary" asp-page="/Reports/Report5">Clear</a>
+        </div>
+    </div>
+    <br/>
+    <br />
+    <div class="display-3 navbar-brand ">
+        <div style="font-weight: bold">
+            <label class="col-sm-2 col-form-label ">
+                Months Without Working:
+                <span class="text-primary" style="font-weight: bold">@ViewData["ResultMonthsWithoutWork"] months</span>
+            </label>
+        </div>
+    </div>
+    <br />
+</form>

@@ -1,0 +1,26 @@
+﻿@page
+@model MoneyPlus.Pages.Typings.DetailsModel
+
+@{
+    ViewData["Title"] = "Details Typings";
+}
+
+<h1 class="display-5">@ViewData["Title"]</h1>
+<br/>
+<div>
+    <h4>Typing</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Typing.Type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Typing.Type)
+        </dd>
+    </dl>
+</div>
+<br/>
+<div>
+    <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@Model.Typing?.Id">Edit</a> |
+    <a class="btn btn-secondary" asp-page="./Index">Back to List</a>
+</div>

@@ -1,0 +1,39 @@
+﻿@page
+@model MoneyPlus.Pages.Typings.IndexModel
+
+@{
+    ViewData["Title"] = "Typings";
+}
+
+<h1 class="display-5">@ViewData["Title"]</h1>
+<br/>
+<p>
+    <a class="btn btn-primary" asp-page="Create">Create New</a> | <a class="btn btn-secondary" asp-page="/Admin/AdministratorArea">Back to Administration</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Typing[0].Type)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+   
+    <tbody>
+@foreach (var item in Model.Typing) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            
+            <td>
+                <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a class="btn btn-secondary" asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

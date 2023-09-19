@@ -1,0 +1,56 @@
+﻿@page
+@model MoneyPlus.Pages.Accounts.CreateModel
+
+@{
+    ViewData["Title"] = "Create New Account";
+}
+
+<h1 class="display-5">@ViewData["Title"]</h1>
+
+<br />
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Account.Type" class="control-label"></label>
+                <select asp-for="Account.Type" class="form-control" >
+                    <option>Wallet</option>
+                    <option>Current Account</option>
+                    <option>Savings Account</option>
+                    <option>Inventment</option>
+                    <option>Other</option>
+                </select>
+                <span asp-validation-for="Account.Type" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label asp-for="Account.Description" class="control-label"></label>
+                <input asp-for="Account.Description" class="form-control" />
+                <span asp-validation-for="Account.Description" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="Account.Balance" class="control-label"></label>
+                <input asp-for="Account.Balance" class="form-control " />
+                <span asp-validation-for="Account.Balance" class="text-danger"></span>
+            </div>
+           @*<div class="form-group">
+                <label asp-for="Account.UserId" class="control-label"></label>
+                <select asp-for="Account.UserId" class="form-control" > </select>
+                <span asp-validation-for="Account.UserId" class="text-danger"></span>
+            </div>*@
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" /> | 
+                <a class="btn btn-secondary" asp-page="Index">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        
+}

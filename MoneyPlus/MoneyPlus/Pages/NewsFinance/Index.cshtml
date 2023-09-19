@@ -1,0 +1,33 @@
+﻿@page
+@model MoneyPlus.Pages.NewsFinance.IndexModel
+@{
+    ViewData["Title"] = "Finance News";
+}
+<h1 class="display-3 text-center">@ViewData["Title"]</h1>
+
+<table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Source</th>
+                <th>News Article</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var article in Model.news.Data)
+        {
+             <tr>
+                 <td>@article.PublishedAt.ToShortDateString()
+                     <br>
+                     @article.PublishedAt.TimeOfDay
+                 </td>
+                  <td>
+                    @article.Source
+                  </td>
+                  <td>
+                     <a target="_blank" href="@article.Url">@article.Title</a>
+                  </td>
+             </tr>
+        }
+        </tbody>
+    </table>

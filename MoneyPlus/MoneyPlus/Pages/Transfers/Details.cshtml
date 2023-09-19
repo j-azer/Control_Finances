@@ -1,0 +1,68 @@
+﻿@page
+@model MoneyPlus.Pages.Transfers.DetailsModel
+
+@{
+    ViewData["Title"] = "Details Release";
+}
+
+<h1 class="display-5">@ViewData["Title"]</h1>
+
+<div>
+<br/>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transfer.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transfer.Date)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transfer.Amount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transfer.Amount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transfer.Typing)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transfer.Typing.Type)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transfer.Account)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transfer.Account.Description)
+        </dd>
+         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transfer.Subcategory.Category)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transfer.Subcategory.Category.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transfer.Subcategory)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transfer.Subcategory.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transfer.Payee)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transfer.Payee.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transfer.Active)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transfer.Active.Description)
+        </dd>
+    </dl>
+</div>
+<br/>
+<div>
+    <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@Model.Transfer?.Id">Edit</a> |
+    <a class="btn btn-secondary" asp-page="./Index">Back to List</a>
+</div>

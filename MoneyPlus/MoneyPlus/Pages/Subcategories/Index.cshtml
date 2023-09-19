@@ -1,0 +1,45 @@
+﻿@page
+@model MoneyPlus.Pages.Subcategories.IndexModel
+
+@{
+    ViewData["Title"] = "Subcategories";
+}
+
+<h1 class="display-5">@ViewData["Title"]</h1>
+
+<p>
+    <a class="btn btn-primary" asp-page="Create">Create New</a> | <a class="btn btn-secondary" asp-page="/Admin/AdministratorArea">Back to Administration</a>
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Subcategory[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subcategory[0].Category)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+ 
+    <tbody>
+@foreach (var item in Model.Subcategory) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            
+            <td>
+                <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a class="btn btn-secondary" asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>  
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,86 @@
+﻿@page
+@model MoneyPlus.Pages.Transfers.IndexModel
+
+@{
+    ViewData["Title"] = "Releases";
+}
+
+<h1 class="display-5">@ViewData["Title"]</h1>
+<br />
+<p>
+    <a class=" btn btn-primary" asp-page="Create">Create New</a> | <a class="btn btn-secondary" asp-page="/Accounts/Index">Back to Account</a>
+</p>
+<table class="nav-justified table table-striped" id="table-releases">
+    <thead class=" text-center">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Transfer[0].Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transfer[0].Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transfer[0].Typing)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transfer[0].Account)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transfer[0].Subcategory.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transfer[0].Subcategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transfer[0].Payee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transfer[0].Active)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transfer[0].AccountIdReceived)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody class=" text-center">
+        @foreach (var item in Model.Transfer)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Typing.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Account.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subcategory.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subcategory.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Payee.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Active.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountIdReceived)
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-secondary" asp-page="./Details" asp-route-id="@item.Id">Dets</a>
+                    <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.Id">Del</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

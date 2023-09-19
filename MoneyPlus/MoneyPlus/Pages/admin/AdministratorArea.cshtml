@@ -1,0 +1,37 @@
+﻿@page
+@model MoneyPlus.Pages.admin.AdministratorAreaModel
+@{
+    ViewData["Title"] = "Administrator Area";
+}
+<head>
+    <style>
+        body {
+            background-image: url('pictures/biblioteca.jpg');
+            background-color: darkgray;
+            background-repeat: no-repeat;
+            background-position: center 0;
+            background-size: cover;
+            
+        }
+    </style>
+</head>
+
+<body class="bg-gradient">
+    <div class="text-center">
+        <h1 class="display-2">@ViewData["Title"]</h1>
+        <br />
+        <br />
+    </div>
+</body> 
+<h5 class="display-6 ">CRUD Categories</h5>
+<a class="btn btn-primary align-content-center" asp-area="" asp-page="/Categories/Index">Go Category</a>
+<br />
+<br />
+<h5 class="display-6 ">CRUD Subcategories</h5>
+<a class="btn btn-primary align-content-center" asp-area="" asp-page="/Subcategories/Index">Go Subcategory</a>
+<br />
+<br />
+<h5 class="display-6 ">CRUD Typings</h5>
+<a class="btn btn-primary align-content-center" asp-area="" asp-page="/Typings/Index">Go Typings</a>
+
+

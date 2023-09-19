@@ -1,0 +1,81 @@
+﻿@page
+@using MoneyPlus.Models;
+@model MoneyPlus.Pages.Reports.Report4Model
+
+@{
+    ViewData["Title"] = "Aggregate Expense by Category/Year ";
+}
+
+<h1 class="display-5">@ViewData["Title"]</h1>
+<br />
+
+<br />
+
+@{
+    var years = (List<int>)ViewData["Years"];
+}
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+
+            </th>
+            @foreach (var year in years)
+            {
+                <th class="text-center">
+                    @Html.DisplayFor(modelItem => year)
+                </th>
+            }
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @{
+            var aggCategorysExpenses = (List<AggregateExepenseCategoryModel>)ViewData["AggCategorysExpenses"];
+            var allCategories = aggCategorysExpenses.Select(a => a.Category).Distinct();
+        }
+        @foreach (var category in allCategories)
+        {
+            <tr style="font-weight: bold">
+                <td>
+                    @Html.DisplayFor(modelItem => category.Name)
+                </td>
+                @foreach (var year in (List<int>)ViewData["Years"])
+                {
+
+                    var totalOfYearByCategory = aggCategorysExpenses.Where(a => a.Category == category && a.Year == year).Sum(a => a.Total);
+
+                    <td class="text-center">
+
+                        @String.Format("{0:c}", totalOfYearByCategory)
+                    </td>
+                }
+            </tr>
+
+        }
+
+        <tr style="font-weight: bold">
+
+            <td class="text-center">Total</td>
+
+            @foreach (var year in (List<int>)ViewData["Years"])
+            {
+                var totalOfYear = aggCategorysExpenses.Where(a => a.Year == year).Sum(a => a.Total);
+
+                <td class="text-center text-danger">
+                    @String.Format("{0:c}", totalOfYear)
+                </td>
+            }
+        </tr>
+    </tbody>
+</table>
+
+
+
+
+<p>
+    <a class="btn btn-secondary" asp-page="/Index">Back to Home</a>
+</p>

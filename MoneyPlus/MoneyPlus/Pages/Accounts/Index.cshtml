@@ -1,0 +1,63 @@
+﻿@page
+@model MoneyPlus.Pages.Accounts.IndexModel
+
+@{
+    ViewData["Title"] = "Accounts";
+}
+
+<h1 class="display-5">@ViewData["Title"]</h1>
+<br/>
+<p>
+    <a class="btn btn-primary" asp-page="Create">Create New</a>
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Account[0].Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account[0].Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account[0].Balance)
+            </th>
+         @*   <th>
+                @Html.DisplayNameFor(model => model.Account[0].UserId)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Account)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Balance)
+                </td>
+               @* <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>*@
+                
+                <td>
+                    <a class="btn btn-success" asp-page="/AccountTransfers/Create" asp-route-id="@item.Id">Transfer</a> |
+                    <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a class="btn btn-secondary" asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,122 @@
+﻿@page
+@using MoneyPlus.Models;
+@model MoneyPlus.Pages.Reports.Report3Model
+
+@{
+    ViewData["Title"] = "Aggregate Expense by Category and Subcategory ";
+}
+
+<h1 class="display-5">@ViewData["Title"]</h1>
+<br />
+
+<form method="get">
+</form>
+<br />
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item  "><a class="btn btn-danger" href="/Reports/Report3?year=@ViewData["lastYear"]">Last Year</a></li>
+        <li class="page-item  "><a class="page-link text-dark" style="font-weight: bold" href="#">Year @ViewData["actualYear"]</a></li>
+        <li class="page-item  "><a class="btn btn-success" href="/Reports/Report3?year=@ViewData["nextYear"]">Next Year</a></li>
+    </ul>
+</nav>
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @ViewData["actualYear"]
+            </th>
+            @foreach (var month in (List<MonthModel>)ViewData["Months"])
+            {
+                <th>
+                    @Html.DisplayFor(modelItem => month.Name)
+                </th>
+            }
+            <th>
+                Total
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            var aggCategorysExpenses = (List<AggregateExepenseCategoryModel>)ViewData["AggCategorysExpenses"];
+            var allCategories = aggCategorysExpenses.Select(a => a.Category).Distinct();
+
+            var aggSubCategorysExpenses = (List<AggregateExepenseSubcategoryModel>)ViewData["AggSubCategorysExpenses"];
+            var allSubCategories = aggSubCategorysExpenses.Select(a => a.Subcategory).Distinct();
+        }
+        @foreach (var category in allCategories)
+        {
+            <tr style="font-weight: bold">
+                <td>
+                    @Html.DisplayFor(modelItem => category.Name)
+                </td>
+                @foreach (var month in (List<MonthModel>)ViewData["Months"])
+                {
+
+                    var totalMonth = aggCategorysExpenses.Where(a => a.Category == category && a.Month == month.Number).Sum(a => a.Total);
+
+                    <td class="text-end">
+                        @String.Format("{0:c}", totalMonth)
+                    </td>
+                }
+
+                @{
+                    var totalForCategories = aggCategorysExpenses.Where(a => a.Category == category).Sum(s => s.Total);
+                }
+                <td class="text-end text-danger">
+                    @String.Format("{0:c}", totalForCategories)
+                </td>
+            </tr>
+
+            @foreach (var subCategory in allSubCategories.Where(a => a.Category == category))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => subCategory.Name)
+                    </td>
+
+                    @foreach (var month in (List<MonthModel>)ViewData["Months"])
+                    {
+                        var totalMonth = aggSubCategorysExpenses.Where(a => a.Subcategory == subCategory && a.Month == month.Number).Sum(a => a.Total);
+
+                        <td class="text-end">
+                            @String.Format("{0:c}", totalMonth)
+                        </td>
+                    }
+
+                    @{
+                        var totalForSubcategories = aggSubCategorysExpenses.Where(a => a.Subcategory == subCategory).Sum(s => s.Total);
+                    }
+                    <td style="font-weight: bold" class="text-end">
+                        @String.Format("{0:c}",totalForSubcategories)
+                    </td>
+                </tr>
+            }
+        }
+       
+
+        <tr style="font-weight: bold">
+
+            <td>Total</td>
+
+            @foreach (var month in (List<MonthModel>)ViewData["Months"])
+            {
+                var totalMonth1 = aggCategorysExpenses.Where(a => a.Month == month.Number).Sum(a => a.Total);
+
+                <td class="text-end text-danger">
+                    @String.Format("{0:c}", totalMonth1)
+                </td>
+            }
+            <td class="text-end text-danger">
+                @String.Format("{0:c}", aggCategorysExpenses.Sum(a => a.Total))
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+    <a class="btn btn-secondary" asp-page="/Index">Back to Home</a>
+</p>

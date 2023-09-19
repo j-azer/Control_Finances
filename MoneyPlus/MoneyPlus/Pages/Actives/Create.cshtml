@@ -1,0 +1,38 @@
+﻿@page
+@model MoneyPlus.Pages.Actives.CreateModel
+
+@{
+    ViewData["Title"] = "Create New Active";
+}
+
+<h1 class="display-5">@ViewData["Title"]</h1>
+<br/>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Active.Description" class="control-label"></label>
+                <input asp-for="Active.Description" class="form-control" />
+                <span asp-validation-for="Active.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Active.Value" class="control-label"></label>
+                <input asp-for="Active.Value" class="form-control" />
+                <span asp-validation-for="Active.Value" class="text-danger"></span>
+            </div>
+            <br />
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" /> | 
+                <a class="btn btn-secondary" asp-page="Index">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,145 @@
+﻿@page
+@model MoneyPlus.Pages.Reports.Report1Model
+
+
+@{
+    ViewData["Title"] = "Monthly Expenses";
+}
+
+<h1 class="display-5">@ViewData["Title"]</h1>
+<br />
+
+<form method="get">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label" style="font-weight: bold">Category</label>
+                <select name="category" class="form-control" asp-items="ViewBag.CategoryId">
+                    <option>
+
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label" style="font-weight: bold">Payee</label>
+                <select name="payee" class="form-control" asp-items="ViewBag.PayeeId">
+                    <option>
+
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label" style="font-weight: bold">Active</label>
+                <select name="active" class="form-control" asp-items="ViewBag.ActiveId">
+                    <option>
+
+                    </option>
+                </select>
+            </div>
+        </div>       
+    </div>
+    <br/>
+    <div class="visually-hidden">
+        <input type="text" name="year" value="@ViewData["actualYear"]" />
+        <input type="text" name="month" value="@ViewData["actualMonth"]" />
+    </div>
+   
+    <div class="row">
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Filter</button> | <a class="btn btn-secondary" asp-page="/Reports/Report1">Clear</a>
+        </div>
+    </div>
+</form>
+<br/>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item  "><a class="btn btn-danger" href="/Reports/Report1?year=@ViewData["lastYear"]&month=@ViewData["actualMonth"]&category=@ViewData["category"]&active=@ViewData["active"]&payee=@ViewData["payee"]">Last Year</a></li>
+        <li class="page-item  "><a class="page-link text-dark" style="font-weight: bold" href="#">Year @ViewData["actualYear"]</a></li>
+        <li class="page-item  "><a class="btn btn-success" href="/Reports/Report1?year=@ViewData["nextYear"]&month=@ViewData["actualMonth"]&category=@ViewData["category"]&active=@ViewData["active"]&payee=@ViewData["payee"]">Next Year</a></li>
+    </ul>
+</nav>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item  "><a class="btn btn-danger" href="/Reports/Report1?month=@ViewData["lastMonth"]&year=@ViewData["actualYear"]&category=@ViewData["category"]&active=@ViewData["active"]&payee=@ViewData["payee"]">Last Month</a></li>
+        <li class="page-item  "><a class="page-link text-dark" style="font-weight: bold" href="#">Month @ViewData["actualMonth"] </a></li>
+        <li class="page-item  "><a class="btn btn-success" href="/Reports/Report1?month=@ViewData["nextMonth"]&year=@ViewData["actualYear"]&category=@ViewData["category"]&active=@ViewData["active"]&payee=@ViewData["payee"]">Next Month</a></li>
+    </ul>
+</nav>
+<div class="display-1 navbar-brand ">
+    <div style="font-weight: bold" class=" text-center">
+        <label class="col-sm-2 col-form-label ">Total Expenses:
+            <span class="text-danger" style="font-weight: bold"> $ @ViewData["ResultSum"]</span>
+        </label>
+    </div>   
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Transfer[0].Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transfer[0].Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transfer[0].Typing)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transfer[0].Account)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transfer[0].Subcategory.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transfer[0].Subcategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transfer[0].Payee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transfer[0].Active)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Transfer)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Typing.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Account.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subcategory.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subcategory.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Payee.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Active.Description)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a class="btn btn-secondary" asp-page="/Index">Back to Home</a>
+</p>
